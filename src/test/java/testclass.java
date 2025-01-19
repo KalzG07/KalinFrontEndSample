@@ -2,7 +2,9 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
-import static ReusableMethods.navigationMethods.navigateToURL;
+import static Config.propertiesdReader.loadProperties;
+import static Pages.LoginPage.LoginPageMethods.loginIntoSauce;
+import static ReusableMethods.NavigationMethods.navigateToURL;
 import static TestAndReporting.ExtentReport.*;
 import static TestAndReporting.SetupAndTearDown.*;
 
@@ -16,11 +18,12 @@ import static TestAndReporting.SetupAndTearDown.*;
  * @version 1.1
  * @since 2025/01/18
  */
-public class swaglabs {
+public class testclass {
 
     @BeforeClass
     public static void setupTestClass() {
         setupReporting();
+        loadProperties("TestData.properties");
         initializeTest("test example", "scenario example");
     }
 
@@ -33,6 +36,7 @@ public class swaglabs {
     private void trafficTestone(Method method) {
         startTest(method.getName(), "describe test");
         navigateToURL("https://www.saucedemo.com/");
+        loginIntoSauce();
 
     }
 }

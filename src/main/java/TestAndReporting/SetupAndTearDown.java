@@ -26,13 +26,13 @@ public class SetupAndTearDown {
         try {
             webDriver.manage().deleteAllCookies();
         } catch (Exception e) {
-            Fail("Failed to clear browser cookies");
+            Fail("Failed to clear browser cookies", takeScreenshot());
         }
 
         try {
             webDriver.quit();
         } catch (Exception e) {
-            Fail("Failed to close the browser instance. Please check the stack trace for more details.");
+            Fail("Failed to close the browser instance. Please check the stack trace for more details.", takeScreenshot());
         }
     }
 }

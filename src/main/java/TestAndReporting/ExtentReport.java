@@ -77,7 +77,7 @@ public class ExtentReport extends Driver {
         getExtentTest().log(Status.INFO, message + getTest().addScreenCaptureFromBase64String(path));
     }
 
-    public static void Fail(String message) {
+    public static void Fail(String message, String s) {
         try {
             getExtentTest().log(Status.FAIL, message);
             Assert.fail(message);

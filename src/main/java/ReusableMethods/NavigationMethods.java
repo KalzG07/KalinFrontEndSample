@@ -12,7 +12,7 @@ import static base.Driver.webDriver;
  * @version 1.1
  * @since 2025/01/18
  */
-public class navigationMethods {
+public class NavigationMethods {
     public static void navigateToURL(String url) {
         try {
             webDriver.get(url);
