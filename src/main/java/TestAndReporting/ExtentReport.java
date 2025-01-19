@@ -73,8 +73,8 @@ public class ExtentReport extends Driver {
         getExtentTest().log(Status.PASS, message);
     }
 
-    public static void Info(String message, String path) {
-        getExtentTest().log(Status.INFO, message + getTest().addScreenCaptureFromBase64String(path));
+    public static void Info(String message) {
+        getExtentTest().info(message);
     }
 
     public static void Fail(String message, String s) {
@@ -85,6 +85,14 @@ public class ExtentReport extends Driver {
             e.printStackTrace();
             Assert.fail(message);
         }
+    }
+
+    public static void softFail(String message, String path) {
+        getExtentTest().log(Status.FAIL, message + getTest().addScreenCaptureFromBase64String(path));
+    }
+
+    public static void softFail(String message) {
+        getExtentTest().log(Status.FAIL, message);
     }
 
     public static synchronized ExtentTest startTest(String testName, String desc) {

@@ -1,15 +1,13 @@
 package ReusableMethods;
 
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.logging.Level;
-
-import static TestAndReporting.ExtentReport.Fail;
+import static TestAndReporting.ExtentReport.*;
 import static TestAndReporting.ExtentReport.takeScreenshot;
+import static Utils.LocatorTypeSelector.getLocatorType;
 import static base.Driver.driverFluentWait;
 import static base.Driver.webDriver;
 
@@ -24,28 +22,29 @@ import static base.Driver.webDriver;
  */
 public class InteractionMethods {
 
-    public void clearTextByLocator(String locator) {
+    public void clearTextByLocator(String type, String locator) {
         try {
-            WebElement element = driverFluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id(locator)));
+            WebElement element = driverFluentWait.until(ExpectedConditions.presenceOfElementLocated(getLocatorType(type, locator)));
             element.sendKeys(Keys.CONTROL + "a");
             element.sendKeys(Keys.DELETE);
         } catch (Exception e) {
             Fail("Could not perform clear action on the locator due to: " + e.getMessage(), takeScreenshot());
         }
     }
-    public void enterTextByLocator(String locator, String valueToType) {
+
+    public void enterTextByLocator(String type, String locator, String valueToType) {
         try {
-            clickOnElement(locator);
-            clearTextByLocator(locator);
-            webDriver.findElement(By.id(locator)).sendKeys(valueToType);
+            clickOnElement(type, locator);
+            clearTextByLocator(type, locator);
+            webDriver.findElement((getLocatorType(type, locator))).sendKeys(valueToType);
         } catch (Exception e) {
-            Fail("Failed to enter text into element.  Locator : " + locator + " | Text to be entered: " + valueToType , takeScreenshot());
+            Fail("Failed to enter text into element.  Locator : " + locator + " | Text to be entered: " + valueToType, takeScreenshot());
         }
     }
 
-    public void clickOnElement(String locator) {
+    public void clickOnElement(String type, String locator) {
         try {
-            webDriver.findElement(By.id(locator)).click();
+            webDriver.findElement(getLocatorType(type, locator)).click();
         } catch (Exception e) {
             Fail("Failed to click on the element. Locator : " + locator, takeScreenshot());
         }

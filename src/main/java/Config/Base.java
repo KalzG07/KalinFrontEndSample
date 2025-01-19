@@ -1,8 +1,9 @@
 package Config;
 
 
+import ReusableMethods.DataHandlingMethods;
 import ReusableMethods.InteractionMethods;
-import ReusableMethods.NavigationMethods;
+import ReusableMethods.SeleniumElementMethods;
 
 /**
  * <h1>Header </h1>
@@ -15,4 +16,6 @@ import ReusableMethods.NavigationMethods;
  */
 public interface Base {
     InteractionMethods interactions = new InteractionMethods();
+    SeleniumElementMethods waits = new SeleniumElementMethods();
+    DataHandlingMethods data = new DataHandlingMethods();
 }

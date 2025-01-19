@@ -8,8 +8,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.logging.Logger;
 
 /**
  * <h1>Header </h1>
@@ -24,9 +26,17 @@ public class Driver {
     public static WebDriver webDriver;
     public static Actions actions;
     public static FluentWait<WebDriver> driverFluentWait;
+    public static WebDriverWait explicitWait;
+    public static final Logger LOGGER = Logger.getLogger(Driver.class.getName());
+
+
+
 
     public Driver() {
+
         initializeChromeDriver();
+        explicitWait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+
     }
 
     private void initializeChromeDriver() {

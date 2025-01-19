@@ -1,11 +1,19 @@
 package Config;
 
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+
+import static TestAndReporting.ExtentReport.Fail;
+import static base.Driver.LOGGER;
 
 /**
  * <h1>Header </h1>
@@ -17,11 +25,12 @@ import java.util.Properties;
  * @since 2025/01/19
  */
 
-public class propertiesdReader {
+public class propertiesAndDataReaders {
     private static Properties properties;
     private static final String DIRECTORY = System.getProperty("user.dir");
     private static final String systemDelimiter = File.separator;
-
+    static JSONObject file = new JSONObject();
+    static JSONParser jsonParser = new JSONParser();
 
 
     public static void loadProperties(String fileName) {
@@ -39,5 +48,30 @@ public class propertiesdReader {
             throw new IllegalStateException("Properties have not been loaded. Call loadProperties() first.");
         }
         return properties.getProperty(key);
+    }
+
+    public static String getJSONPath(String jsonFileName) {
+        return DIRECTORY.concat("/TestData/" + jsonFileName);
+    }
+
+    public static JSONArray getJsonObjectData(String filePath, String array) {
+        JSONObject file = parseFile(filePath);
+
+        if (file != null) {
+            return (JSONArray) file.get(array);
+        }
+        return null;
+
+    }
+
+
+    private static JSONObject parseFile(String filePath) {
+        try {
+            return (JSONObject) jsonParser.parse(new FileReader(filePath));
+        } catch (Exception e) {
+            System.err.println("Error parsing file: " + filePath);
+            e.printStackTrace();
+        }
+        return null;
     }
 }

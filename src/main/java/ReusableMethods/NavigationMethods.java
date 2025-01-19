@@ -17,7 +17,7 @@ public class NavigationMethods {
         try {
             webDriver.get(url);
         } catch (Exception e) {
-            Info("Failed to navigate to webpage. URL used : " + url + ". Error message: " + e.getMessage(), takeScreenshot());
+            Info("Failed to navigate to webpage. URL used : " + url + ". Error message: " + e.getMessage());
         }
     }
 }
