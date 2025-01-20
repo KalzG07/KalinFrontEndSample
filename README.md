@@ -37,6 +37,7 @@ Most of the methods contain java docs to explain their function.
 1. Clone this repository:
    git clone https://github.com/KalzG07/KalinFrontEndSample.git
 2. Resolve dependencies
+3. ensure docker is up using command in terminal: docker-compose up -d
 3. Run XML
 
 ### Run XML file
