@@ -8,8 +8,8 @@ import static Pages.ReusableLocators.titleText;
 import static TestAndReporting.ExtentReport.*;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>Common methods that be used for validation or functionality </h1>
+ * common methods that can used throughout the project
  * <p>
  *
  * @author Kalin Govender

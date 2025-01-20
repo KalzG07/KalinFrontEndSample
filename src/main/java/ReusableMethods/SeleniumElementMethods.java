@@ -14,8 +14,7 @@ import static Utils.LocatorTypeSelector.getLocatorType;
 import static base.Driver.*;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>Selenium methods </h1>
  * <p>
  *
  * @author Kalin Govender

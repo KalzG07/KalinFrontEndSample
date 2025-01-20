@@ -12,8 +12,9 @@ import static base.Driver.driverFluentWait;
 import static base.Driver.webDriver;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>Interaction methods </h1>
+ * Methods that are used to interact with the front end, such as clicks clear text
+ * and enter text which can be used throughout the project.
  * <p>
  *
  * @author Kalin Govender

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 
 /**
- * <h1>Header </h1>
+ * <h1>Extent Report </h1>
  * description
  * <p>
  *

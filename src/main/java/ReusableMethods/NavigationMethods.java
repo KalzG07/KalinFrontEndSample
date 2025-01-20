@@ -4,8 +4,8 @@ import static TestAndReporting.ExtentReport.*;
 import static base.Driver.webDriver;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>Navigation methods </h1>
+
  * <p>
  *
  * @author Kalin Govender

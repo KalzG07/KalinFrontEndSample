@@ -4,10 +4,9 @@ package Pages;
 import static TestAndReporting.ExtentReport.softFail;
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>Reusable Locators </h1>
  *
+ * This centralizes a handler for locators where, they can be referenced from different points in the project
  * @author Kalin Govender
  * @version 1.1
  * @since 2025/01/19

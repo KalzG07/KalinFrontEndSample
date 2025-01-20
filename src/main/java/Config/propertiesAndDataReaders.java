@@ -10,19 +10,23 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-
-import static TestAndReporting.ExtentReport.Fail;
-import static base.Driver.LOGGER;
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>propertiesAndDataReaders Class</h1>
+ *
+ * <p>This class provides utility methods for loading properties and JSON data files.</p>
+ *
+ * <h2>Methods:</h2>
+ * <ul>
+ *     <li><b>loadProperties(String fileName):</b> Loads properties from the specified file.</li>
+ *     <li><b>getProperty(String key):</b> Retrieves a property value by key.</li>
+ *     <li><b>getJSONPath(String jsonFileName):</b> Returns the full path to a JSON file.</li>
+ *     <li><b>getJsonObjectData(String filePath, String array):</b> Retrieves a JSON array from a JSON file.</li>
+ * </ul>
  *
  * @author Kalin Govender
- * @version 1.1
- * @since 2025/01/19
+ * @version 1.0
+ * @since 2025/01/18
  */
 
 public class propertiesAndDataReaders {

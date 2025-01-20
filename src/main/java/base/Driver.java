@@ -15,9 +15,20 @@ import java.time.Duration;
 import java.util.logging.Logger;
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>Driver Class</h1>
+ *
+ * <p>This class handles the initialization of the Selenium WebDriver and configuration for interacting with the browser,
+ * either Chrome or Firefox, through a Selenium Grid.</p>
+ *
+ * <p>The class provides methods for initializing the remote WebDriver, setting up the necessary capabilities,
+ * and ensuring proper setup for web interactions using the FluentWait and WebDriverWait classes.</p>
+ *
+ * <h2>Methods:</h2>
+ * <ul>
+ *     <li><b>Driver(String browser):</b> Constructor that initializes the WebDriver based on the specified browser (Chrome or Firefox).</li>
+ *     <li><b>initializeRemoteDriver(String browser):</b> Initializes the WebDriver remotely using Selenium Grid and
+ *     sets the necessary capabilities for Chrome or Firefox.</li>
+ * </ul>
  *
  * @author Kalin Govender
  * @version 1.1

@@ -6,9 +6,7 @@ import static Pages.ReusableLocators.elementsById;
 import static ReusableMethods.commonMethods.clickOnButton;
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>Checkout :Your Information page Elements and Methods </h1>
  *
  * @author Kalin Govender
  * @version 1.1

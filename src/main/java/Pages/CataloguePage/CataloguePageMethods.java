@@ -16,9 +16,7 @@ import java.util.Random;
 
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>Catalogue Page Elements and Methods </h1>
  *
  * @author Kalin Govender
  * @version 1.1

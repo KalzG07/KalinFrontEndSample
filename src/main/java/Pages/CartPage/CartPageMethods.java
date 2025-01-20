@@ -10,9 +10,7 @@ import static TestAndReporting.ExtentReport.*;
 import static Config.Base.waits;
 
 /**
- * <h1>Header </h1>
- * description
- * <p>
+ * <h1>Cart Page Elements and Methods </h1>
  *
  * @author Kalin Govender
  * @version 1.1

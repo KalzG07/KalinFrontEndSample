@@ -7,8 +7,8 @@ import static Utils.LocatorTypeSelector.getLocatorType;
 import static base.Driver.webDriver;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>Data Handling methods </h1>
+ * Methods used to extract, manipulate or confirm text values from locators
  * <p>
  *
  * @author Kalin Govender
