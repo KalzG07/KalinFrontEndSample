@@ -43,7 +43,6 @@ public class ExtentReport extends Driver {
         super(browser);
     }
 
-
     public static void setupReporting() {
         if (!new File(DIRECTORY_PATH).exists()) {
             boolean status = new File(DIRECTORY_PATH).mkdirs();
@@ -57,9 +56,9 @@ public class ExtentReport extends Driver {
             logger.log(Level.INFO, "HTML Reporter has been initialized!");
             try {
                 extent.setSystemInfo("Host name", InetAddress.getLocalHost().getHostName());
-                extent.setSystemInfo("user", "" + System.getProperty("user.name") + "");
+                extent.setSystemInfo("user", System.getProperty("user.name"));
             } catch (UnknownHostException e) {
-                logger.log(Level.WARNING,"Error from report setup" + e);
+                logger.log(Level.WARNING, "Error from report setup" + e);
             }
         }
     }
@@ -85,27 +84,38 @@ public class ExtentReport extends Driver {
             getExtentTest().log(Status.FAIL, message);
             Assert.fail(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Failure occured" + e);
             Assert.fail(message);
         }
     }
 
     public static void softFail(String message, String path) {
-        getExtentTest().log(Status.FAIL, message + getTest().addScreenCaptureFromBase64String(path));
+        if (getTest() != null) {
+            getTest().log(Status.FAIL, message + getTest().addScreenCaptureFromBase64String(path));
+        } else {
+            LOGGER.warning("Test object is null. Cannot add screenshot.");
+        }
     }
 
     public static void softFail(String message) {
-        getExtentTest().log(Status.FAIL, message);
+        if (getTest() != null) {
+            getTest().log(Status.FAIL, message);
+        } else {
+            LOGGER.warning("Test object is null. Cannot log message.");
+        }
     }
+
+    private static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
 
     public static synchronized ExtentTest startTest(String testName, String desc) {
         node = test.createNode(testName, desc);
+        extentTestThread.set(node);
         extentTestMap.put((int) (Thread.currentThread().getId()), node);
         return node;
     }
 
     public static synchronized ExtentTest getTest() {
-        return extentTestMap.get((int) (Thread.currentThread().getId()));
+        return extentTestThread.get();
     }
 
     public static String takeScreenshot() {
@@ -118,5 +128,12 @@ public class ExtentReport extends Driver {
             LOGGER.log(Level.SEVERE, e.getMessage());
         }
         return path;
+    }
+
+    public static void flushReports() {
+        if (extent != null) {
+            extent.flush();
+            logger.log(Level.INFO, "Extent report has been flushed and saved!");
+        }
     }
 }

@@ -30,7 +30,7 @@ public class AddItemToCartTests {
     public static void setupTestClass() {
         setupReporting();
         loadProperties("TestData.properties");
-        initializeTest("test example", "scenario example");
+        initializeTest("Test add to cart functionality", "Add item to cart and complete checkout process.");
     }
 
     @BeforeMethod
