@@ -53,4 +53,10 @@ public class AddItemToCartTests {
         confirmCompleteOrderElements();
 
     }
+
+    @AfterMethod(groups = {"Sanity", "Regression"})
+    private void endDriver() {
+        closeBrowser();
+        Info("Cookies cleared & Browser instance closed.");
+    }
 }
