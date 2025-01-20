@@ -18,7 +18,19 @@ public class ReusableLocators {
         return "//span[@data-test='title'][text()='" + text + "']";
     }
 
-
+    /**
+     * <h1>Get element ID by name</h1>
+     *
+     * <p>This method returns the corresponding element ID for a given name. It maps user-friendly names
+     * like "Username", "Password", etc., to their respective IDs used in the UI.</p>
+     *
+     * <p>If the name is not recognized, it logs a failure.</p>
+     *
+     * @param id The name of the element to look up.
+     * @return The corresponding element ID.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static String elementsById(String id) {
         switch (id) {
             case "Username":

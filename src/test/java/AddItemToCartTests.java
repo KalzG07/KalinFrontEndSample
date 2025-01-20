@@ -42,7 +42,7 @@ public class AddItemToCartTests {
     @Test()
     private void AddItemToCartAndCompleteCheckout(Method method) {
         startTest(method.getName(), "Test to see if an item can be added to cart and successfully complete checkout process.");
-        navigateToURL("https://www.saucedemo.com/");
+
         loginIntoSauce();
         confirmIfItemsArePresent();
         clickAndValidateRandomItem();

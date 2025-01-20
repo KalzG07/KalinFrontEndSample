@@ -18,6 +18,18 @@ public class YourInformationPage {
     public static final String locatorType = "id";
 
 
+    /**
+     * <h1>Fill in user information on the checkout page</h1>
+     *
+     * <p>This method enters user details (First Name, Last Name, Postal Code) into the respective fields
+     * and clicks the 'Continue' button to proceed to the next page.</p>
+     *
+     * <p>After entering the information, it logs the action of clicking the 'Continue' button.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
+
     public static void fillInInformation() {
         interactions.enterTextByLocator(locatorType, elementsById("First Name"), "Firstname");
         interactions.enterTextByLocator(locatorType, elementsById("Last Name"), "Lastname");

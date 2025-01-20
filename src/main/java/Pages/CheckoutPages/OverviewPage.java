@@ -48,6 +48,17 @@ public class OverviewPage {
         return "//div[@data-test='" + element + "']";
     }
 
+    /**
+     * <h1>Confirm elements on the Overview page</h1>
+     *
+     * <p>This method checks the visibility of elements (Payment Information, Shipping Information, Price Total, etc.)
+     * on the Overview page. It also clicks the 'Finish' button after confirming the elements.</p>
+     *
+     * <p>If any element is not visible, it logs a failure. The method logs the action of clicking the 'Finish' button.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void confirmOverviewElements() {
         String[] elements = {
                 "Payment Information",

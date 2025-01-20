@@ -22,6 +22,18 @@ import static base.Driver.webDriver;
  */
 public class InteractionMethods {
 
+    /**
+     * <h1>Clear text in an element</h1>
+     *
+     * <p>This method clears the text in an input field identified by the given locator type and locator.</p>
+     *
+     * <p>If an error occurs during the clearing action, it logs a failure.</p>
+     *
+     * @param type The type of the locator (e.g., "id", "xpath").
+     * @param locator The locator for the element.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public void clearTextByLocator(String type, String locator) {
         try {
             WebElement element = driverFluentWait.until(ExpectedConditions.presenceOfElementLocated(getLocatorType(type, locator)));
@@ -31,7 +43,19 @@ public class InteractionMethods {
             Fail("Could not perform clear action on the locator due to: " + e.getMessage(), takeScreenshot());
         }
     }
-
+    /**
+     * <h1>Enter text into an element</h1>
+     *
+     * <p>This method clicks on an element, clears any existing text, and enters the specified text.</p>
+     *
+     * <p>If an error occurs during the action, it logs a failure.</p>
+     *
+     * @param type The type of the locator (e.g., "id", "xpath").
+     * @param locator The locator for the element.
+     * @param valueToType The text value to enter into the element.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public void enterTextByLocator(String type, String locator, String valueToType) {
         try {
             clickOnElement(type, locator);
@@ -41,7 +65,18 @@ public class InteractionMethods {
             Fail("Failed to enter text into element.  Locator : " + locator + " | Text to be entered: " + valueToType, takeScreenshot());
         }
     }
-
+    /**
+     * <h1>Click on an element</h1>
+     *
+     * <p>This method clicks on an element identified by the given locator type and locator.</p>
+     *
+     * <p>If an error occurs during the click action, it logs a failure.</p>
+     *
+     * @param type The type of the locator (e.g., "id", "xpath").
+     * @param locator The locator for the element.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public void clickOnElement(String type, String locator) {
         try {
             webDriver.findElement(getLocatorType(type, locator)).click();

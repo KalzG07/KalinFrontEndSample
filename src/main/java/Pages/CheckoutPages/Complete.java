@@ -22,6 +22,16 @@ public class Complete {
     public static String ThankYouText = "//div[@data-test='complete-text'][text()='Your order has been dispatched, and will arrive just as fast as the pony can get there!']";
 
 
+    /**
+     * <h1>Confirm elements on the Checkout Complete page</h1>
+     *
+     * <p>This method checks the visibility of elements (Thank You header and text) on the Checkout Complete page.</p>
+     *
+     * <p>If any element is not visible, it logs a failure.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void confirmCompleteOrderElements() {
         String[] elements = {ThankYouHeader, ThankYouText};
 

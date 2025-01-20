@@ -32,6 +32,18 @@ public class CartPageMethods {
         return "//div[@data-test='cart-" + type + "-label']";
     }
 
+
+    /**
+     * <h1>Confirm cart elements on the cart page</h1>
+     *
+     * <p>This method verifies the presence of cart columns (Quantity, Description) and action buttons (Continue Shopping, Checkout)
+     * on the cart page. It checks for the visibility of each element and logs the result.</p>
+     *
+     * <p>If any element is missing, it logs a failure and captures a screenshot.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void confirmCartElements() {
         String[] columns = {"Quantity", "Description"};
         String[] actions = {"Continue Shopping", "Checkout"};

@@ -39,10 +39,30 @@ public class ExtentReport extends Driver {
     static final String DIRECTORY_PATH = System.getProperty("user.dir") + SYSTEM_DELIMITER + "ExtentReports";
     private static final Logger logger = Logger.getLogger(ExtentReport.class.getName());
 
+
+    /**
+     * <h1>Constructor for ExtentReport</h1>
+     *
+     * <p>Initializes an ExtentReport instance with the specified browser.</p>
+     *
+     * @param browser The name of the browser to initialize the report.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public ExtentReport(String browser) {
         super(browser);
     }
 
+
+    /**
+     * <h1>Setup Reporting</h1>
+     *
+     * <p>This method sets up the report directory and initializes the ExtentReports instance with a Spark reporter.</p>
+     * <p>If the directory does not exist, it is created. The system info, including host and user, is also added to the report.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void setupReporting() {
         if (!new File(DIRECTORY_PATH).exists()) {
             boolean status = new File(DIRECTORY_PATH).mkdirs();

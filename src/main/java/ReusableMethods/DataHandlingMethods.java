@@ -17,6 +17,19 @@ import static base.Driver.webDriver;
  */
 public class DataHandlingMethods {
 
+    /**
+     * <h1>Extract text value from an element</h1>
+     *
+     * <p>This method retrieves the text value of an element identified by the given locator type and locator.</p>
+     *
+     * <p>If an error occurs during the extraction, it logs a failure and returns an empty string.</p>
+     *
+     * @param type The type of the locator (e.g., "id", "xpath").
+     * @param locator The locator for the element.
+     * @return The text value of the element.
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public String extractTextValueByLocator(String type, String locator) {
         String text = "";
         try {

@@ -65,10 +65,35 @@ public class CataloguePageMethods {
         return "add-to-cart-" + formattedName;
     }
 
-    // Confirm if items are present on the page and log the results
+
+
+    /**
+     * <h1>Catalogue page methods</h1>
+     * Methods used to interact and test elements on the catalogue page
+     * <p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
+
+
+    /**
+     * <h1>Confirm items are present on the catalogue page</h1>
+     *
+     * <p>This method checks if each product's details (name, description, price) and the 'Add to Cart' button
+     * are visible on the catalogue page by iterating through the product list from the JSON file (ProductsData.json).</p>
+     *
+     * <p>If any element is missing, it logs a failure and captures a screenshot. If the product data cannot be fetched,
+     * a failure is logged.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void confirmIfItemsArePresent() {
+        Info("Checking is all items and details are present on the screen.");
         String[] inventoryElements = {"item name", "item description", "item price"};
         JSONArray products = getJsonObjectData(PATH, "Products");
+
 
         if (products != null) {
             for (Object o : products) {
@@ -108,6 +133,19 @@ public class CataloguePageMethods {
         }
     }
 
+    /**
+     * <h1>Click and validate random item on the catalogue page</h1>
+     *
+     * <p>This method randomly selects a product from the JSON file (ProductsData.json), clicks the 'Add to Cart' button,
+     * and verifies if the button changes to 'Remove'. It also checks if the cart badge reflects the correct number of items
+     * in the cart.</p>
+     *
+     * <p>If any issue is found, such as the button not being visible or the cart badge not matching, it logs a failure
+     * and captures a screenshot. If an error occurs during the process, it logs the error.</p>
+     *
+     * @author Kalin Govender
+     * @since 2025/01/20
+     */
     public static void clickAndValidateRandomItem() {
         try {
             JSONArray products = getJsonObjectData(PATH, "Products");
