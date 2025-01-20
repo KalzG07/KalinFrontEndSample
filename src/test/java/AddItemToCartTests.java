@@ -1,6 +1,8 @@
+import com.github.javafaker.Faker;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 
 import static Config.propertiesAndDataReaders.loadProperties;
 import static Pages.CartPage.CartPageMethods.clickOnCheckOut;
@@ -10,7 +12,6 @@ import static Pages.CheckoutPages.Complete.confirmCompleteOrderElements;
 import static Pages.CheckoutPages.OverviewPage.confirmOverviewElements;
 import static Pages.CheckoutPages.YourInformationPage.fillInInformation;
 import static Pages.LoginPage.LoginPageMethods.loginIntoSauce;
-import static ReusableMethods.NavigationMethods.navigateToURL;
 import static TestAndReporting.ExtentReport.*;
 import static TestAndReporting.SetupAndTearDown.*;
 
@@ -26,6 +27,7 @@ import static TestAndReporting.SetupAndTearDown.*;
  */
 public class AddItemToCartTests {
 
+
     @BeforeClass
     public static void setupTestClass() {
         setupReporting();
@@ -40,7 +42,7 @@ public class AddItemToCartTests {
     }
 
     @Test()
-    private void AddItemToCartAndCompleteCheckout(Method method) {
+    private void AddItemToCartAndCompleteCheckout(Method method) throws SQLException {
         startTest(method.getName(), "Test to see if an item can be added to cart and successfully complete checkout process.");
 
         loginIntoSauce();
@@ -55,7 +57,7 @@ public class AddItemToCartTests {
 
     }
 
-    @AfterMethod(groups = {"Sanity", "Regression"})
+    @AfterMethod
     private void endDriver() {
         closeBrowser();
         Info("Cookies cleared & Browser instance closed.");

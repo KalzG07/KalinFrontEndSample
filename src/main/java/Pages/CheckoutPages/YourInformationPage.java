@@ -1,7 +1,12 @@
 package Pages.CheckoutPages;
 
 
+import com.github.javafaker.Faker;
+
+import java.sql.SQLException;
+
 import static Config.Base.interactions;
+import static MySQL.MySQLMethods.*;
 import static Pages.ReusableLocators.elementsById;
 import static ReusableMethods.commonMethods.clickOnButton;
 
@@ -14,6 +19,10 @@ import static ReusableMethods.commonMethods.clickOnButton;
  */
 public class YourInformationPage {
     public static final String locatorType = "id";
+    static Faker faker = new Faker();
+    static String firstname = faker.name().firstName();
+    static String lastname = faker.name().lastName();
+    static String postalCode = faker.address().zipCode();
 
 
     /**
@@ -28,10 +37,13 @@ public class YourInformationPage {
      * @since 2025/01/20
      */
 
-    public static void fillInInformation() {
-        interactions.enterTextByLocator(locatorType, elementsById("First Name"), "Firstname");
-        interactions.enterTextByLocator(locatorType, elementsById("Last Name"), "Lastname");
-        interactions.enterTextByLocator(locatorType, elementsById("Postal Code"), "123456");
+    public static void fillInInformation() throws SQLException {
+        interactions.enterTextByLocator(locatorType, elementsById("First Name"), firstname);
+        interactions.enterTextByLocator(locatorType, elementsById("Last Name"), lastname);
+        interactions.enterTextByLocator(locatorType, elementsById("Postal Code"), postalCode);
+
+        checkAndCreateDatabase();
+        addUserAndConfirmRecord(firstname, lastname, postalCode);
 
         clickOnButton("Continue", "Checkout: Overview", " Entered Information and click continue button.");
 
