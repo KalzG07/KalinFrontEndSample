@@ -1,9 +1,7 @@
 package base;
 
 import org.openqa.selenium.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -56,9 +54,9 @@ public class Driver {
             actions = new Actions(webDriver);
 
             driverFluentWait = new FluentWait<>(webDriver)
-                    .withTimeout(Duration.ofSeconds(10))  // Maximum wait time
-                    .pollingEvery(Duration.ofMillis(500)) // Polling interval
-                    .ignoring(NoSuchElementException.class) // Ignore common exceptions
+                    .withTimeout(Duration.ofSeconds(10))
+                    .pollingEvery(Duration.ofMillis(500))
+                    .ignoring(NoSuchElementException.class)
                     .ignoring(ElementNotInteractableException.class)
                     .ignoring(StaleElementReferenceException.class);
 
