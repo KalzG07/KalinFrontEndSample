@@ -39,8 +39,12 @@ public class ExtentReport extends Driver {
     static final String DIRECTORY_PATH = System.getProperty("user.dir") + SYSTEM_DELIMITER + "ExtentReports";
     private static final Logger logger = Logger.getLogger(ExtentReport.class.getName());
 
+    public ExtentReport(String browser) {
+        super(browser);
+    }
 
-    public static ExtentReports setupReporting() {
+
+    public static void setupReporting() {
         if (!new File(DIRECTORY_PATH).exists()) {
             boolean status = new File(DIRECTORY_PATH).mkdirs();
             logger.log(Level.CONFIG, "New directory created: {0}", String.valueOf(status));
@@ -55,10 +59,9 @@ public class ExtentReport extends Driver {
                 extent.setSystemInfo("Host name", InetAddress.getLocalHost().getHostName());
                 extent.setSystemInfo("user", "" + System.getProperty("user.name") + "");
             } catch (UnknownHostException e) {
-                e.printStackTrace();
+                logger.log(Level.WARNING,"Error from report setup" + e);
             }
         }
-        return extent;
     }
 
     public static void initializeTest(String testName, String scenarioName) {

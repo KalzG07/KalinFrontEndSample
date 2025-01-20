@@ -2,6 +2,7 @@ package TestAndReporting;
 
 
 import base.Driver;
+import org.openqa.selenium.WebDriver;
 
 import static TestAndReporting.ExtentReport.*;
 import static base.Driver.webDriver;
@@ -16,21 +17,24 @@ import static base.Driver.webDriver;
  * @since 2025/01/18
  */
 public class SetupAndTearDown {
+    public static ThreadLocal<WebDriver> threadLocalWebDriver = new ThreadLocal<>();
 
+    public static void setupBrowser(String browser) {
+        Driver driver = new Driver(browser);
+        threadLocalWebDriver.set(webDriver);
+    }
 
-    public static void setupBrowser() {
-        new Driver();
+    public static WebDriver getWebDriver() {
+        return threadLocalWebDriver.get();
     }
 
     public static void closeBrowser() {
         try {
-            webDriver.manage().deleteAllCookies();
-        } catch (Exception e) {
-            Fail("Failed to clear browser cookies", takeScreenshot());
-        }
-
-        try {
-            webDriver.quit();
+            WebDriver webDriver = getWebDriver();
+            if (webDriver != null) {
+                webDriver.manage().deleteAllCookies();
+                webDriver.quit();
+            }
         } catch (Exception e) {
             Fail("Failed to close the browser instance. Please check the stack trace for more details.", takeScreenshot());
         }

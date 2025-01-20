@@ -34,8 +34,9 @@ public class AddItemToCartTests {
     }
 
     @BeforeMethod
-    private void setupTestMethod() {
-        setupBrowser();
+    @Parameters("browser")
+    private void setupTestMethod(String browser) {
+        setupBrowser(browser);
     }
 
     @Test()

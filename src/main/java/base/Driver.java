@@ -3,6 +3,7 @@ package base;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -31,22 +32,33 @@ public class Driver {
 
     private static final String GRID_URL = "http://localhost:4444/wd/hub";
 
-    public Driver() {
-        initializeRemoteDriver();
+    public Driver(String browser) {
+        initializeRemoteDriver(browser);
         explicitWait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
     }
 
-    private void initializeRemoteDriver() {
+    private void initializeRemoteDriver(String browser) {
         try {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--window-size=1920x1080");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--remote-allow-origins=*");
+            DesiredCapabilities capabilities;
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
+            if (browser.equalsIgnoreCase("chrome")) {
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--window-size=1920x1080");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--remote-allow-origins=*");
+                capabilities = new DesiredCapabilities();
+                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+            } else if (browser.equalsIgnoreCase("firefox")) {
+                FirefoxOptions options = new FirefoxOptions();
+                options.addArguments("--window-size=1920x1080");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-gpu");
+                capabilities = new DesiredCapabilities();
+                capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+            } else {
+                throw new IllegalArgumentException("Browser not supported: " + browser);
+            }
             webDriver = new RemoteWebDriver(new URL(GRID_URL), capabilities);
 
             webDriver.manage().deleteAllCookies();
