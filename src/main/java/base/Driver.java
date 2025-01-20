@@ -35,8 +35,8 @@ import java.util.logging.Logger;
  * @since 2025/01/18
  */
 public class Driver {
-    public static WebDriver webDriver;
-    public static Actions actions;
+    private static WebDriver webDriver;
+    private Actions actions;
     public static FluentWait<WebDriver> driverFluentWait;
     public static WebDriverWait explicitWait;
     public static final Logger LOGGER = Logger.getLogger(Driver.class.getName());
@@ -50,26 +50,7 @@ public class Driver {
 
     private void initializeRemoteDriver(String browser) {
         try {
-            DesiredCapabilities capabilities;
-
-            if (browser.equalsIgnoreCase("chrome")) {
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--window-size=1920x1080");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--disable-gpu");
-                options.addArguments("--remote-allow-origins=*");
-                capabilities = new DesiredCapabilities();
-                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-            } else if (browser.equalsIgnoreCase("firefox")) {
-                FirefoxOptions options = new FirefoxOptions();
-                options.addArguments("--window-size=1920x1080");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--disable-gpu");
-                capabilities = new DesiredCapabilities();
-                capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
-            } else {
-                throw new IllegalArgumentException("Browser not supported: " + browser);
-            }
+            DesiredCapabilities capabilities = getDesiredCapabilities(browser);
             webDriver = new RemoteWebDriver(new URL(GRID_URL), capabilities);
 
             webDriver.manage().deleteAllCookies();
@@ -82,9 +63,36 @@ public class Driver {
                     .ignoring(NoSuchElementException.class)
                     .ignoring(ElementNotInteractableException.class)
                     .ignoring(StaleElementReferenceException.class);
-
         } catch (Exception e) {
             LOGGER.severe("Error initializing the Selenium Grid driver: " + e.getMessage());
         }
+    }
+
+    private DesiredCapabilities getDesiredCapabilities(String browser) {
+        DesiredCapabilities capabilities;
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--window-size=1920x1080");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-allow-origins=*");
+            capabilities = new DesiredCapabilities();
+            capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--window-size=1920x1080");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            capabilities = new DesiredCapabilities();
+            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+        } else {
+            throw new IllegalArgumentException("Browser not supported: " + browser);
+        }
+        return capabilities;
+    }
+
+    public static WebDriver getWebDriver() {
+        return webDriver;
     }
 }

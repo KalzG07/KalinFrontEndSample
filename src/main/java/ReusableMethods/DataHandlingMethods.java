@@ -3,8 +3,8 @@ package ReusableMethods;
 
 import static TestAndReporting.ExtentReport.*;
 import static TestAndReporting.ExtentReport.takeScreenshot;
+import static TestAndReporting.SetupAndTearDown.getWebDriver;
 import static Utils.LocatorTypeSelector.getLocatorType;
-import static base.Driver.webDriver;
 
 /**
  * <h1>Data Handling methods </h1>
@@ -33,7 +33,7 @@ public class DataHandlingMethods {
     public String extractTextValueByLocator(String type, String locator) {
         String text = "";
         try {
-            return webDriver.findElement(getLocatorType(type,locator)).getText();
+            return getWebDriver().findElement(getLocatorType(type,locator)).getText();
         } catch (Exception e) {
             Fail("Failed to extract text from frontend", takeScreenshot());
             return text;

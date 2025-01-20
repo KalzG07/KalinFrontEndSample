@@ -1,7 +1,7 @@
 package ReusableMethods;
 
 import static TestAndReporting.ExtentReport.*;
-import static base.Driver.webDriver;
+import static TestAndReporting.SetupAndTearDown.getWebDriver;
 
 /**
  * <h1>Navigation methods </h1>
@@ -15,7 +15,7 @@ import static base.Driver.webDriver;
 public class NavigationMethods {
     public static void navigateToURL(String url) {
         try {
-            webDriver.get(url);
+            getWebDriver().get(url);
         } catch (Exception e) {
             Info("Failed to navigate to webpage. URL used : " + url + ". Error message: " + e.getMessage());
         }

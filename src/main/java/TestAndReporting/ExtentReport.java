@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
 /**
  * <h1>Extent Report </h1>
  * description
@@ -141,7 +142,7 @@ public class ExtentReport extends Driver {
     public static String takeScreenshot() {
         String path = "";
         try {
-            TakesScreenshot ts = (TakesScreenshot) webDriver;
+            TakesScreenshot ts = (TakesScreenshot) getWebDriver();
             path = ts.getScreenshotAs(OutputType.BASE64);
             LOGGER.log(Level.INFO, "A screenshot has been taken");
         } catch (Exception e) {

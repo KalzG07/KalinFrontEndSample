@@ -1,7 +1,6 @@
 package ReusableMethods;
 
 
-import Utils.LocatorTypeSelector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +9,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.logging.Level;
 
+import static TestAndReporting.SetupAndTearDown.getWebDriver;
 import static Utils.LocatorTypeSelector.getLocatorType;
 import static base.Driver.*;
 
@@ -65,7 +65,7 @@ public class SeleniumElementMethods {
      */
     public List<WebElement> findElementsByLocator(String locatorType, String locator) {
         By by = getLocator(locatorType, locator);
-        return webDriver.findElements(by);
+        return getWebDriver().findElements(by);
     }
 
     /**

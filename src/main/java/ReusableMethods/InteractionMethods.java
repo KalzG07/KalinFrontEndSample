@@ -9,9 +9,8 @@ import java.util.Objects;
 
 import static TestAndReporting.ExtentReport.*;
 import static TestAndReporting.ExtentReport.takeScreenshot;
+import static TestAndReporting.SetupAndTearDown.getWebDriver;
 import static Utils.LocatorTypeSelector.getLocatorType;
-import static base.Driver.driverFluentWait;
-import static base.Driver.webDriver;
 
 /**
  * <h1>Interaction methods </h1>
@@ -63,7 +62,7 @@ public class InteractionMethods {
         try {
             clickOnElement(type, locator);
             clearTextByLocator(type, locator);
-            webDriver.findElement((Objects.requireNonNull(getLocatorType(type, locator)))).sendKeys(valueToType);
+            getWebDriver().findElement((Objects.requireNonNull(getLocatorType(type, locator)))).sendKeys(valueToType);
         } catch (Exception e) {
             Fail("Failed to enter text into element.  Locator : " + locator + " | Text to be entered: " + valueToType, takeScreenshot());
         }
@@ -82,7 +81,7 @@ public class InteractionMethods {
      */
     public void clickOnElement(String type, String locator) {
         try {
-            webDriver.findElement(Objects.requireNonNull(getLocatorType(type, locator))).click();
+            getWebDriver().findElement(Objects.requireNonNull(getLocatorType(type, locator))).click();
         } catch (Exception e) {
             Fail("Failed to click on the element. Locator : " + locator, takeScreenshot());
         }

@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.logging.Level;
 
 import static TestAndReporting.ExtentReport.*;
-import static base.Driver.LOGGER;
 
 /**
  * <h1>MySQLMethods Class</h1>

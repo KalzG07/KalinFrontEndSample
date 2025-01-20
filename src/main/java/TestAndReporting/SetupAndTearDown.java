@@ -5,7 +5,6 @@ import base.Driver;
 import org.openqa.selenium.WebDriver;
 
 import static TestAndReporting.ExtentReport.*;
-import static base.Driver.webDriver;
 /**
  * <h1>SetupAndTearDown Class</h1>
  *
@@ -29,7 +28,7 @@ public class SetupAndTearDown {
 
     public static void setupBrowser(String browser) {
         Driver driver = new Driver(browser);
-        threadLocalWebDriver.set(webDriver);
+        threadLocalWebDriver.set(driver.getWebDriver());
     }
 
     public static WebDriver getWebDriver() {
@@ -42,6 +41,7 @@ public class SetupAndTearDown {
             if (webDriver != null) {
                 webDriver.manage().deleteAllCookies();
                 webDriver.quit();
+                threadLocalWebDriver.remove();
             }
         } catch (Exception e) {
             Fail("Failed to close the browser instance. Please check the stack trace for more details.", String.valueOf(e));
