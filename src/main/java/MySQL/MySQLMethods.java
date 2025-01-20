@@ -8,8 +8,10 @@ import static TestAndReporting.ExtentReport.*;
 import static base.Driver.LOGGER;
 
 /**
- * <h1>Header </h1>
- * description
+ * <h1>MySQLMethods Class</h1>
+ * This class provides methods to interact with a MySQL database, including operations
+ * such as connecting to the database, creating a database and table, inserting user information,
+ * and verifying if a user exists in the database.
  * <p>
  *
  * @author Kalin Govender
@@ -23,10 +25,23 @@ public class MySQLMethods {
     static String dbName = "test_db";  // Database name should be test_db or the one where your table resides
     static String tableName = "user_info";  // Table name
 
+
+    /**
+     * Establishes a connection to the MySQL database.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
+    /**
+     * Checks if the database and table exist, and creates them if necessary.
+     * If the database does not exist, it will be created. Similarly, if the table
+     * does not exist, it will be created within the specified database.
+     *
+     * @throws SQLException if a database access error occurs
+     */
     public static void checkAndCreateDatabase() {
         String createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS " + dbName;
         String createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
@@ -39,7 +54,6 @@ public class MySQLMethods {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement stmt = connection.createStatement()) {
 
-            // Check if the database exists
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet resultSet = metaData.getCatalogs();
 
@@ -60,7 +74,6 @@ public class MySQLMethods {
                 Info("Database already exists.");
             }
 
-            // Create the table if it doesn't exist
             stmt.executeUpdate(createTableQuery);
             Info("Table 'user_info' is ready.");
         } catch (SQLException e) {
@@ -68,6 +81,14 @@ public class MySQLMethods {
         }
     }
 
+    /**
+     * Inserts a new user's information into the user_info table.
+     *
+     * @param firstName  The user's first name
+     * @param lastName   The user's last name
+     * @param postalCode The user's postal code
+     * @throws SQLException if a database access error occurs
+     */
     public static void insertUserInfo(String firstName, String lastName, String postalCode) throws SQLException {
         String query = "INSERT INTO " + tableName + " (first_name, last_name, postal_code) VALUES (?, ?, ?)";
         try (Connection connection = getConnection();
@@ -79,6 +100,15 @@ public class MySQLMethods {
         }
     }
 
+    /**
+     * Checks if a user with the specified information already exists in the user_info table.
+     *
+     * @param firstName  The user's first name
+     * @param lastName   The user's last name
+     * @param postalCode The user's postal code
+     * @return true if the user exists, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
     private static boolean checkUserExists(String firstName, String lastName, String postalCode) throws SQLException {
         String query = "SELECT * FROM " + tableName + " WHERE first_name = ? AND last_name = ? AND postal_code = ?";
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -87,8 +117,8 @@ public class MySQLMethods {
             stmt.setString(2, lastName);
             stmt.setString(3, postalCode);
             ResultSet rs = stmt.executeQuery();
-            boolean exists = rs.next();  // If data exists, it will return true
-            rs.close();  // Close the ResultSet to prevent memory leaks
+            boolean exists = rs.next();
+            rs.close();
             return exists;
         }
     }
